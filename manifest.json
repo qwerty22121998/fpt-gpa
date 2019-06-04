@@ -9,7 +9,6 @@
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
-  "default_locale": "en",
   "page_action": {
     "default_icon": "icons/icon19.png",
     "default_title": "FU GPA"
