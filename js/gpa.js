@@ -38,5 +38,3 @@ const semSubAvg = semsub => {
     })
 }
 
-
-let data = semSubAvg(semSubList(semesterList(record), subjList(record, blackList)))
