@@ -1,10 +1,10 @@
 
-const blackList = ["OJS", "VOV", "GDQP", "PRO001"]
+const blackList = ["OJS", "VOV", "GDQP"]
 
 const record = $(".table.table-hover>tbody:first>tr")
 
 const semesterList = (record) => record.find("td:nth-child(3)").toArray().
-    filter(e => e.firstChild !== null).map(e=>e.firstChild.textContent).
+    filter(e => e.firstChild !== null).map(e => e.firstChild.textContent).
     map(e => {
         let h = e.length / 2;
         return e.slice(0, h) !== e.slice(h) ? e : e.slice(0, h)
@@ -31,10 +31,19 @@ const semSubList = (sem, sub) => sem.map(sem => ({
 const avg = sem => sem.list.map(sem => sem.grade * sem.credit).
     reduce((a, b) => a - -b, 0) / sem.list.map(sem => sem.credit).reduce((a, b) => a - -b, 0)
 
-const semSubAvg = semsub => {
-    return semsub.map(semsub => {
-        semsub.avg = avg(semsub)
-        return semsub
-    })
+const semSubAvg = semsub => semsub.map(semsub => {
+    semsub.avg = avg(semsub)
+    return semsub
+})
+
+const totalAvg = semsub => {
+    let semsubFiltered = semsub.filter(semsub => semsub.list.length)
+    let totalGrade = semsubFiltered.reduce((a, b) =>
+        a + b.list.reduce((u, v) => u - -v.grade * v.credit, 0), 0)
+
+    let totalCredit = semsubFiltered.reduce((a, b) =>
+        a + b.list.reduce((u, v) => u - -v.credit, 0), 0)
+    return totalGrade / totalCredit
+
 }
 
