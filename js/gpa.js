@@ -1,5 +1,5 @@
 
-const blackList = ["OJS", "VOV", "GDQP"]
+const blackList = ["OJS", "VOV", "GDQP","LAB"]
 
 const record = $(".table.table-hover>tbody:first>tr")
 
