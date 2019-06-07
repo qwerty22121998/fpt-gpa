@@ -25,7 +25,6 @@ const semSubList = (sem, sub) => sem.map(sem => ({
     "semester": sem,
     "list": sub.filter(sub => sub.semester == sem)
 }))
-// .filter(semsub => semsub.list.length)
 
 
 const avg = sem => sem.list.map(sem => sem.grade * sem.credit).
