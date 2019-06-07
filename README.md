@@ -1,3 +1,4 @@
 # fpt-gpa
 
-A GPA caculator
+A GPA caculator  
+<img src="gpa.png"/>
