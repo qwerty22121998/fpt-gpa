@@ -22,7 +22,7 @@ const gpaBtn = $(`<button></button>`, {
 
 
 const rawData = semSubList(semesterList(record), subjList(record, blackList))
-const data = semSubAvg(rawData)
+const data = sort(semSubAvg(rawData))
 
 const gpaTable = gpaContent.find("table").get(0)
 

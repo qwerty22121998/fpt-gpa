@@ -1,5 +1,5 @@
 
-const blackList = ["OJS", "VOV", "GDQP","LAB"]
+const blackList = ["OJS", "VOV", "GDQP", "LAB"]
 
 const record = $(".table.table-hover>tbody:first>tr")
 
@@ -43,6 +43,19 @@ const totalAvg = semsub => {
     let totalCredit = semsubFiltered.reduce((a, b) =>
         a + b.list.reduce((u, v) => u - -v.credit, 0), 0)
     return totalGrade / totalCredit
-
 }
 
+const SEM = { "Spring": 0, "Summer": 1, "Fall": 2, "Winter": 3 }
+
+const sort = semsubavg => {
+    return semsubavg.sort((a, b) => {
+        let ayear = a.semester.substr(-4)
+        let byear = b.semester.substr(-4)
+        if (ayear != byear) {
+            return ayear - byear
+        }
+        let asem = a.semester.substr(0, a.length - 4)
+        let bsem = b.semester.substr(0, b.length - 4)
+        return SEM[asem] - SEM[bsem]
+    })
+}
