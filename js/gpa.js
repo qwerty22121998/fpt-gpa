@@ -19,7 +19,7 @@ const subjList = (record, blackList) => record.toArray().
         "credit": e.childNodes[6].textContent,
         "grade": e.childNodes[7].textContent,
         "status": e.childNodes[8].textContent,
-    })).filter(e => e.term !== "0" && !blackList.some(prefix => e.subject_code.includes(prefix)) && e.grade && e.status == "Passed")
+    }))
 
 const semSubList = (sem, sub) => sem.map(sem => ({
     "semester": sem,
@@ -27,8 +27,13 @@ const semSubList = (sem, sub) => sem.map(sem => ({
 }))
 
 
-const avg = sem => sem.list.map(sem => sem.grade * sem.credit).
-    reduce((a, b) => a - -b, 0) / sem.list.map(sem => sem.credit).reduce((a, b) => a - -b, 0)
+const creditSub = list => list.filter(e => e.term !== "0" && !blackList.some(prefix => e.subject_code.includes(prefix)) && e.grade && e.status == "Passed")
+
+const avg = sem => {
+    let filtered = creditSub(sem.list)
+    return filtered.map(sem => sem.grade * sem.credit).
+        reduce((a, b) => a - -b, 0) / filtered.map(sem => sem.credit).reduce((a, b) => a - -b, 0)
+}
 
 const semSubAvg = semsub => semsub.map(semsub => {
     semsub.avg = avg(semsub)
@@ -38,10 +43,10 @@ const semSubAvg = semsub => semsub.map(semsub => {
 const totalAvg = semsub => {
     let semsubFiltered = semsub.filter(semsub => semsub.list.length)
     let totalGrade = semsubFiltered.reduce((a, b) =>
-        a + b.list.reduce((u, v) => u - -v.grade * v.credit, 0), 0)
+        a + creditSub(b.list).reduce((u, v) => u - -v.grade * v.credit, 0), 0)
 
     let totalCredit = semsubFiltered.reduce((a, b) =>
-        a + b.list.reduce((u, v) => u - -v.credit, 0), 0)
+        a + creditSub(b.list).reduce((u, v) => u - -v.credit, 0), 0)
     return totalGrade / totalCredit
 }
 
