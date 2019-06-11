@@ -1,7 +1,13 @@
-
 .gpa-panel {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
   width: 100%;
+}
+
+.point {
+  margin-left: -2px;
+  border-top-left-radius: 0% !important;
+  border-bottom-left-radius: 0% !important;
+  border-left: white 1px solid;
 }

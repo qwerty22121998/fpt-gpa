@@ -37,13 +37,34 @@ const generateHeader = (table, header) => {
     })
 }
 
+const labelGradeType = value => {
+    switch (true) {
+        case value === `No Data`: return `warning`; break
+        case value < 5: return `danger`; break
+        case value < 8: return `info`; break
+        case value < 9: return `primary`; break
+        default: return `success`
+    }
+}
+
+const labelSubType = value => {
+    switch (true) {
+        case blackList.some(prefix => value.includes(prefix)): return `default`; break
+        default: return `primary`; break
+    }
+}
+
+const labelGrade = data => `<span class="label label-` + labelGradeType(data) + `">` + data + `</span>`
+const labelSubject = (data, point, credit) => `<span class="label label-` + labelSubType(data) + `">` + data + `</span>` + (point ? `<span class="label point label-` + labelGradeType(point) + `">` + point + ` x ` + credit + `</span>` : ``)
+
+
 const generateGPALabel = grade =>
     match(grade).
-        on(x => x === `No Data`, x => `<span class="label label-warning">` + x + `</span>`).
-        on(x => x < 5, x => `<span class="label label-danger">` + x + `</span>`).
-        on(x => x < 8, x => `<span class="label label-info">` + x + `</span>`).
-        on(x => x < 9, x => `<span class="label label-primary">` + x + `</span>`).
-        otherwise(x => `<span class="label label-success">` + x + `</span>`)
+        on(x => x === `No Data`, x => labelGrade(x)).
+        on(x => x < 5, x => labelGrade(x)).
+        on(x => x < 8, x => labelGrade(x)).
+        on(x => x < 9, x => labelGrade(x)).
+        otherwise(x => labelGrade(x))
 
 
 const insertRow = (table, data) => {
@@ -53,12 +74,15 @@ const insertRow = (table, data) => {
 
 const createTable = (table, data) =>
     data.map(r => {
-        insertRow(table, [r.semester, generateGPALabel(r.avg !== r.avg ? `No Data` : Math.round(r.avg * 1000) / 1000)])
+        insertRow(table, [r.semester, r.list.map(
+            s => labelSubject(s.subject_code, s.grade, s.credit)).join(` `),
+        generateGPALabel(r.avg !== r.avg ? `No Data` : Math.round(r.avg * 1000) / 1000)])
     })
+
 
 $(`#ctl00_mainContent_lblRollNumber`).append(` - `).append(gpaBtn)
 $(`#Grid`).before(gpaContent)
-generateHeader(gpaTable, ["Semester", "GPA"])
+generateHeader(gpaTable, ["Semester", "Subjects", "GPA"])
 createTable(gpaTable, data)
-insertRow(gpaTable, ["<b>Total Avg</b>",generateGPALabel(totalAvg(rawData))])
+insertRow(gpaTable, ["<b>Total Avg</b>", ``, generateGPALabel(totalAvg(rawData))])
 
