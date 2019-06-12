@@ -1,7 +1,7 @@
 # fpt-gpa
 
 A GPA caculator  
-<img src="gpa.png"/>
+<img src="screenshot.png"/>
 
 
 <img src="icons/icon16.png"/>
