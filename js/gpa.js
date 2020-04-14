@@ -1,4 +1,4 @@
-const blackList = ["OJS", "VOV", "GDQP", "LAB", "ENT", "SSS", "ĐNH", "PMG"];
+const blackList = ["OJS", "VOV", "GDQP", "LAB", "ENT", "SSS", "ĐNH"];
 
 const record = $(".table.table-hover>tbody:first>tr");
 
