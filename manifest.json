@@ -1,6 +1,6 @@
 {
   "name": "FU GPA",
-  "version": "1.2.3",
+  "version": "1.3.0",
   "manifest_version": 2,
   "description": "Caculate Total GPA and semester GPA",
   "homepage_url": "https://www.facebook.com/khanhvu2212",
@@ -13,12 +13,23 @@
     "default_icon": "icons/icon19.png",
     "default_title": "FU GPA"
   },
-  "permissions": ["http://fap.fpt.edu.vn/Grade/StudentTranscript.aspx"],
+  "permissions": [
+    "http://fap.fpt.edu.vn/Grade/StudentTranscript.aspx",
+    "storage"
+  ],
   "content_scripts": [
     {
-      "matches": ["http://fap.fpt.edu.vn/Grade/StudentTranscript.aspx"],
-      "css": ["css/gpa.css"],
-      "js": ["js/jquery-3.4.1.min.js", "js/gpa.js", "js/inject.js"],
+      "matches": [
+        "http://fap.fpt.edu.vn/Grade/StudentTranscript.aspx"
+      ],
+      "css": [
+        "css/gpa.css"
+      ],
+      "js": [
+        "js/jquery-3.4.1.min.js",
+        "js/gpa.js",
+        "js/inject.js"
+      ],
       "run_at": "document_end"
     }
   ]

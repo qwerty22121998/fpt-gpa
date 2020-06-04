@@ -1,6 +1,28 @@
-const blackList = ["OJS", "VOV", "GDQP", "LAB", "ENT", "SSS", "ĐNH"];
+
+const DEFAULT_BLACK_LIST = ["OJS", "VOV", "GDQP", "LAB", "ENT", "SSS", "ĐNH"];
+
+var blackList = [];
+
 
 const record = $(".table.table-hover>tbody:first>tr");
+
+const getBlackList = () => {
+  chrome.storage.sync.get(["blackList"], items => {
+    if (!items['blackList']) setBlackList()
+    else blackList = items['blackList']
+    console.log('black list : ', blackList)
+    main()  
+  })
+}
+
+const setBlackList = (list = DEFAULT_BLACK_LIST) => {
+  if (!list) list = DEFAULT_BLACK_LIST
+  chrome.storage.sync.set({ blackList: list }, () => {
+    blackList = list
+    console.log('update black list : ', blackList)
+  })
+}
+
 
 const semesterList = record =>
   record
