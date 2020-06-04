@@ -11,3 +11,8 @@
   border-bottom-left-radius: 0% !important;
   border-left: white 1px solid;
 }
+
+.bl-btn {
+  margin-left: 2pt;
+  color: white;
+}
