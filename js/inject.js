@@ -79,8 +79,17 @@ const createTable = (table, data) =>
         generateGPALabel(r.avg !== r.avg ? `No Data` : Math.round(r.avg * 1000) / 1000)])
     })
 
+const resetBLBtn = $(`<button></button>`, {
+    "class": "btn label-warning bl-btn",
+    "id": "r-bl-btn",
+    "type": "button",
+}).text("Default").click(() => {
+    setBlackList(DEFAULT_BLACK_LIST)
+    location.reload()
+})
+
 const updateBLBtn = $(`<button></button>`, {
-    "class": "btn label-success",
+    "class": "btn label-success bl-btn",
     "id": "bl-btn",
     "type": "button",
 }).text("Update").click(() => {
@@ -105,7 +114,7 @@ const blLabel = $('<label><label>', {
 
 const bllist = () => $('<div></div>', {
     "class": "form-inline"
-}).append(blLabel).append(blInput()).append(updateBLBtn).append('<br/><hr/>')
+}).append(blLabel).append(blInput()).append(updateBLBtn).append(resetBLBtn).append('<br/><hr/>')
 
 
 getBlackList()
