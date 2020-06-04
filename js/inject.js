@@ -79,10 +79,42 @@ const createTable = (table, data) =>
         generateGPALabel(r.avg !== r.avg ? `No Data` : Math.round(r.avg * 1000) / 1000)])
     })
 
+const updateBLBtn = $(`<button></button>`, {
+    "class": "btn label-success",
+    "id": "bl-btn",
+    "type": "button",
+}).text("Update").click(() => {
+    let list = $('#bl-list').val().split(',').map(e => e.trim())
+    setBlackList(list)
+    location.reload()
+})
 
-$(`#ctl00_mainContent_lblRollNumber`).append(` - `).append(gpaBtn)
-$(`#Grid`).before(gpaContent)
-generateHeader(gpaTable, ["Semester", "Subjects", "GPA"])
-createTable(gpaTable, data)
-insertRow(gpaTable, ["<b>Total Avg</b>", ``, generateGPALabel(totalAvg(rawData))])
+const blInput = () => $('<input></input>', {
+    class: "form-control",
+    style: "width: 50%",
+    id: "bl-list",
+    type: "text",
+    value: blackList
+})
 
+const blLabel = $('<label><label>', {
+    for: "bl-list"
+}).text("Blacklist: ")
+
+
+
+const bllist = () => $('<div></div>', {
+    "class": "form-inline"
+}).append(blLabel).append(blInput()).append(updateBLBtn).append('<br/><hr/>')
+
+
+getBlackList()
+
+const main = () => {
+    $(`#ctl00_mainContent_lblRollNumber`).append(` - `).append(gpaBtn)
+    $(`#Grid`).before(gpaContent)
+    gpaContent.prepend(bllist())
+    generateHeader(gpaTable, ["Semester", "Subjects", "GPA"])
+    createTable(gpaTable, data)
+    insertRow(gpaTable, ["<b>Total Avg</b>", ``, generateGPALabel(totalAvg(rawData))])
+}
