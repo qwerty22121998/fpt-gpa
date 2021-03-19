@@ -15,12 +15,14 @@
   },
   "permissions": [
     "http://fap.fpt.edu.vn/Grade/StudentTranscript.aspx",
+    "https://fap.fpt.edu.vn/Grade/StudentTranscript.aspx",
     "storage"
   ],
   "content_scripts": [
     {
       "matches": [
-        "http://fap.fpt.edu.vn/Grade/StudentTranscript.aspx"
+        "http://fap.fpt.edu.vn/Grade/StudentTranscript.aspx",
+        "https://fap.fpt.edu.vn/Grade/StudentTranscript.aspx"
       ],
       "css": [
         "css/gpa.css"
