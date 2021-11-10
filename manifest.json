@@ -22,15 +22,15 @@
     {
       "matches": [
         "http://fap.fpt.edu.vn/Grade/StudentTranscript.aspx",
-        "https://fap.fpt.edu.vn/Grade/StudentTranscript.aspx"
+        "https://fap.fpt.edu.vn/Grade/StudentTranscript.aspx",
+        "file:///home/vuhk/GitHub/fpt-gpa/example/fap.fpt.edu.vn/Grade/index.html"
       ],
       "css": [
         "css/gpa.css"
       ],
       "js": [
-        "js/jquery-3.4.1.min.js",
-        "js/gpa.js",
-        "js/inject.js"
+        "js/util.js",
+        "js/gpa.js"
       ],
       "run_at": "document_end"
     }
