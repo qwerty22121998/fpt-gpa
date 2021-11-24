@@ -1,8 +1,11 @@
-.gpa-panel {
-  max-height: 0;
+#gpa-panel {
   overflow: hidden;
   transition: max-height 0.2s ease-out;
   width: 100%;
+}
+
+#gpa-btn {
+  cursor: pointer;
 }
 
 .bl-btn {
@@ -23,4 +26,40 @@
 .subject-block .point {
   margin-left: -3px;
   position: relative;
+}
+
+.non-gpa {
+  font-size: 10pt !important;
+  line-height: 2 !important;
+  /* position: relative; */
+}
+
+.non-gpa-delete {
+  margin-left: -2px;
+  margin-right: 2px;
+  /* position: relative; */
+}
+
+.w-25 {
+  width: 25%;
+}
+
+.w-50 {
+  width: 50%;
+}
+.w-100 {
+  width: 100%;
+}
+
+.spacing-h {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.inline {
+  display: inline;
 }
