@@ -148,6 +148,7 @@ const main = async () => {
   await getNonGPAList();
   const mainGrade = parseGrade(gradeTablesDOM[0]);
   mainGrade.forEach((subj) => {
+    if (!subj.semester) subj.semester = subj.status;
     if (!mapSemester[subj.semester]) {
       mapSemester[subj.semester] = new Semester(subj.semester);
     }
@@ -179,9 +180,9 @@ const main = async () => {
   );
   gpa = gpa.sum / gpa.total;
   table.addRow(
+    "",
+    "",
     createHTML("<h4><b>Total avg</b></h4>"),
-    "",
-    "",
     createHTML(
       `<h4 style="text-align:start"><span class="label ${rankLabel(
         gpa

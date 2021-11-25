@@ -71,8 +71,13 @@ class Semester {
   year;
   subjects = [];
   constructor(name) {
-    this.semester = name.slice(0, -4);
-    this.year = name.slice(-4);
+    if (name == "Not started") {
+      this.semester = name;
+      this.year = "";
+    } else {
+      this.semester = name.slice(0, -4);
+      this.year = name.slice(-4);
+    }
   }
 
   get Year() {
@@ -108,6 +113,10 @@ class Semester {
         return createHTML(`<span class="label label-success">Spring</span>`);
       case "Fall":
         return createHTML(`<span class="label label-info">Fall</span>`);
+      default:
+        return createHTML(
+          `<span class="label label-default">${this.semester}</span>`
+        );
     }
   }
 
