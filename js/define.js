@@ -1,11 +1,3 @@
-const SemIndex = {
-  Spring: 0,
-  Summer: 1,
-  Fall: 2,
-};
-
-const DefaultNonGPA = ["OJS", "VOV", "GDQP", "LAB", "ENT", "SSS", "ĐNH", "TMI"];
-
 class Subject {
   semester;
   code;
@@ -83,21 +75,8 @@ class Semester {
   get Year() {
     return this.year;
   }
-  get Gpa() {
-    const avg = this.subjects.reduce(
-      (avg, subj) => {
-        if (subj.includeInGPA() && subj.status == "Passed")
-          return {
-            sum: avg.sum + subj.grade * subj.credit,
-            total: avg.total + subj.credit,
-          };
-        return avg;
-      },
-      {
-        sum: 0,
-        total: 0,
-      }
-    );
+  get GpaDOM() {
+    const avg = getGPAInfo(this.subjects);
     if (avg.total == 0) {
       return createHTML(`<span class="label label-default">No Data</span>`);
     }
@@ -105,7 +84,7 @@ class Semester {
     return createHTML(`<span class="label ${rankLabel(gpa)}">${gpa}</span>`);
   }
 
-  get Semester() {
+  get SemesterDOM() {
     switch (this.semester) {
       case "Summer":
         return createHTML(`<span class="label label-warning">Summer</span>`);
@@ -120,7 +99,7 @@ class Semester {
     }
   }
 
-  get Subjects() {
+  get SubjectsDOM() {
     const div = document.createElement("div");
     this.subjects.forEach((sub) => {
       div.append(sub.DOM());

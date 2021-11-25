@@ -39,7 +39,7 @@
 }
 
 .non-gpa-delete {
-  margin-left: -2px;
+  margin-left: -4px;
   margin-right: 2px;
   /* position: relative; */
 }
@@ -51,6 +51,7 @@
 .w-50 {
   width: 50%;
 }
+
 .w-100 {
   width: 100%;
 }
@@ -66,4 +67,12 @@
 
 .inline {
   display: inline;
+}
+
+.form-control {
+  border-radius: 8px 0 0 8px !important;
+}
+
+.input-group-btn span {
+  border-radius: 0 10px 10px 0 !important;
 }
