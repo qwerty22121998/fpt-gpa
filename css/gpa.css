@@ -18,6 +18,10 @@
   margin-right: 5px;
 }
 
+#gpa-table .label {
+  line-height: 2 !important;
+}
+
 .subject-block .code {
   z-index: 9999999;
   position: relative;
