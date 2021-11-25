@@ -17,4 +17,4 @@ const SemIndex = {
   Fall: 2,
 };
 
-const DefaultNonGPA = ["OJS", "VOV", "GDQP", "LAB", "ENT", "SSS", "ĐNH"];
+const DefaultNonGPA = ["OJS", "VOV", "GDQP", "LAB", "ENT", "SSS", "TMI"];

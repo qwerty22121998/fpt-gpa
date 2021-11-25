@@ -121,4 +121,23 @@ const appendGPATable = (table) => {
   container.append(renderNonGPAEditor(), table.DOM());
   gridDom.prepend(container);
   container.style.maxHeight = container.scrollHeight + "px";
-}
+};
+
+const renderList = (listSubjCell, nonGPAList) => {
+  listSubjCell.innerHTML = "";
+  nonGPAList.forEach((subj) => {
+    const removeBtn = createHTML(
+      `<a href="#" class="non-gpa non-gpa-delete label label-danger">x</a>`
+    );
+    removeBtn.onclick = async () => {
+      nonGPAList = nonGPAList.filter((e) => e != subj);
+      renderList(listSubjCell, nonGPAList);
+    };
+    const block = createHTML(`<div class="inline-block"/>`);
+    block.append(
+      createHTML(`<span class="non-gpa label label-primary">${subj}</span>`),
+      removeBtn
+    );
+    listSubjCell.append(block);
+  });
+};
