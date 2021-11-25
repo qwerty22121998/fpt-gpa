@@ -29,6 +29,8 @@
     "js": [
       "js/define.js",
       "js/util.js",
+      "js/const.js",
+      "js/nonGPA.js",
       "js/logic.js"
     ],
     "run_at": "document_end"
