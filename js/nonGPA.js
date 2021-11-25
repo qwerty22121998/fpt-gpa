@@ -24,7 +24,27 @@ const setNonGPAList = async (list) => {
   });
 };
 
-const inputNonGPARow = (addSubjRow, nonGPAList) => {
+const renderList = (listSubjCell) => {
+  listSubjCell.innerHTML = "";
+  nonGPAList.forEach((subj) => {
+    const removeBtn = createHTML(
+      `<a href="#" class="non-gpa non-gpa-delete label label-danger">x</a>`
+    );
+    removeBtn.onclick = async () => {
+      nonGPAList = nonGPAList.filter((e) => e != subj);
+      console.log(nonGPAList);
+      renderList(listSubjCell);
+    };
+    const block = createHTML(`<div class="inline-block"/>`);
+    block.append(
+      createHTML(`<span class="non-gpa label label-primary">${subj}</span>`),
+      removeBtn
+    );
+    listSubjCell.append(block);
+  });
+};
+
+const inputNonGPARow = (listSubjCell, addSubjRow) => {
   addSubjRow.insertCell().outerHTML = "<th>Thêm môn vào danh sách:</th>";
 
   const addSubjCell = createHTML(`<div class="input-group"></div>`);
@@ -39,19 +59,18 @@ const inputNonGPARow = (addSubjRow, nonGPAList) => {
     if (!subject) return;
     console.log(subject);
     nonGPAList.push(subject);
-    renderList(listSubjCell, nonGPAList);
+    renderList(listSubjCell);
     input.value = "";
   };
 
   addSubjCell.append(input, submitBtn);
   addSubjRow.insertCell().append(addSubjCell);
-  return nonGPAList;
 }
 
-const showNonGPARow = (listSubjRow, nonGPAList) => {
+const showNonGPARow = (listSubjRow) => {
   const listSubjCell = createHTML('<td class="w-50"/>');
 
-  renderList(listSubjCell, nonGPAList);
+  renderList(listSubjCell);
 
   // Submit / reset default
   const submitCell = createHTML(`<th rowspan="2" class="w-25 buttons"//>`);
@@ -62,11 +81,12 @@ const showNonGPARow = (listSubjRow, nonGPAList) => {
   defaultBtn.onclick = () => {
     nonGPAList = DefaultNonGPA;
     setNonGPAList(nonGPAList);
-    renderList(listSubjCell, nonGPAList);
+    renderList(listSubjCell);
   };
 
   const saveBtn = createHTML(`<span class="btn btn-primary w-100">Lưu</span>`);
   saveBtn.onclick = () => {
+    console.log(nonGPAList);
     setNonGPAList(nonGPAList);
   };
 
@@ -81,7 +101,7 @@ const showNonGPARow = (listSubjRow, nonGPAList) => {
     listSubjCell,
     submitCell
   );
-  return nonGPAList;
+  return listSubjCell;
 }
 
 const renderNonGPAEditor = () => {
@@ -92,10 +112,10 @@ const renderNonGPAEditor = () => {
 
   // List non gpa subject
   const listSubjRow = thead.insertRow();
-  nonGPAList = showNonGPARow(listSubjRow, nonGPAList);
+  listSubjCell = showNonGPARow(listSubjRow);
 
   const addSubjRow = thead.insertRow();
-  nonGPAList = inputNonGPARow(addSubjRow, nonGPAList);
+  inputNonGPARow(listSubjCell, addSubjRow);
 
   return root;
 };
