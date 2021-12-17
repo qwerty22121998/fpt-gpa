@@ -43,6 +43,13 @@ const showButtonDOM = () => {
   return dom;
 };
 
+const helpBtnRender = () => {
+  return createHTML(
+    `<a href="https://github.com/qwerty22121998/fpt-gpa/blob/master/README.md" class="label label-info" target="_blank" id="help-btn">Help</a>`
+  );
+}
+
+
 const renderShowButton = (headerDOM) => {
   headerDOM.append(" - ", showButtonDOM());
 };
@@ -106,6 +113,7 @@ const buildGPATable = (mapSemester, mainGrade) => {
 const appendGPATable = (table) => {
   const container = createHTML(`<div id="gpa-panel">`);
   const showBtnDOM = showButtonDOM();
+  const helpBtn = helpBtnRender();
 
   console.log(container.style.maxHeight);
   showBtnDOM.onclick = () => {
@@ -118,6 +126,7 @@ const appendGPATable = (table) => {
   };
 
   headerDOM.append(" - ", showBtnDOM);
+  headerDOM.append(" - ", helpBtn);
   container.append(renderNonGPAEditor(), table.DOM());
   gridDom.prepend(container);
   container.style.maxHeight = container.scrollHeight + "px";
