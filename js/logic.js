@@ -1,6 +1,5 @@
 "use strict";
 
-
 const main = async () => {
   await getNonGPAList();
   const mainGrade = parseGrade(gradeTablesDOM[0]);
