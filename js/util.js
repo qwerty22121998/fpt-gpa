@@ -121,4 +121,4 @@ const appendGPATable = (table) => {
   container.append(renderNonGPAEditor(), table.DOM());
   gridDom.prepend(container);
   container.style.maxHeight = container.scrollHeight + "px";
-}
+};
