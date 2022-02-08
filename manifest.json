@@ -18,21 +18,33 @@
     "https://fap.fpt.edu.vn/Grade/StudentTranscript.aspx",
     "storage"
   ],
-  "content_scripts": [{
-    "matches": [
-      "https://fap.fpt.edu.vn/Grade/StudentTranscript.aspx",
-      "http://fap.fpt.edu.vn/Grade/StudentTranscript.aspx"
-    ],
-    "css": [
-      "css/gpa.css"
-    ],
-    "js": [
-      "js/define.js",
-      "js/util.js",
-      "js/const.js",
-      "js/nonGPA.js",
-      "js/logic.js"
-    ],
-    "run_at": "document_end"
-  }]
+  "content_scripts": [
+    {
+      "matches": [
+        "https://fap.fpt.edu.vn/Grade/StudentTranscript.aspx",
+        "http://fap.fpt.edu.vn/Grade/StudentTranscript.aspx"
+      ],
+      "css": [
+        "css/gpa.css"
+      ],
+      "js": [
+        "js/define.js",
+        "js/util.js",
+        "js/const.js",
+        "js/nonGPA.js",
+        "js/logic.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://fap.fpt.edu.vn/Feedback/*",
+        "http://fap.fpt.edu.vn/Feedback/*"
+      ],
+      "js": [
+        "js/feedback.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
 }
