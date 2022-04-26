@@ -20,9 +20,9 @@ const createElement = (root, ...elems) => {
 };
 
 const rankLabel = (grade) => {
-  if (grade >= 9) return "label-warning";
-  if (grade >= 8) return "label-primary";
-  if (grade >= 5) return "label-info";
+  if (grade >= 9) return "label-primary";
+  if (grade >= 8) return "label-info";
+  if (grade >= 5) return "label-warning";
   return "label-danger";
 };
 
@@ -37,11 +37,18 @@ const parseGrade = (doms) => {
 
 const showButtonDOM = () => {
   const dom = createHTML(
-    `<button class="label label-success" id="gpa-btn" type="button">Show GPA</button>`
+    `<button class="label label-success" style="border: none;" id="gpa-btn" type="button">Hide GPA</button>`
   );
 
   return dom;
 };
+
+const helpBtnRender = () => {
+  return createHTML(
+    `<a href="https://github.com/qwerty22121998/fpt-gpa/blob/master/README.md" class="label label-info" target="_blank" id="help-btn">Help</a>`
+  );
+}
+
 
 const renderShowButton = (headerDOM) => {
   headerDOM.append(" - ", showButtonDOM());
@@ -106,19 +113,22 @@ const buildGPATable = (mapSemester, mainGrade) => {
 const appendGPATable = (table) => {
   const container = createHTML(`<div id="gpa-panel">`);
   const showBtnDOM = showButtonDOM();
+  const helpBtn = helpBtnRender();
 
   console.log(container.style.maxHeight);
   showBtnDOM.onclick = () => {
-    console.log(container.style.maxHeight);
     if (container.style.maxHeight != "0px") {
       container.style.maxHeight = "0px";
+      showBtnDOM.innerText = "Show GPA";
     } else {
       container.style.maxHeight = container.scrollHeight + 30 + "px";
+      showBtnDOM.innerText = "Hide GPA";
     }
   };
 
   headerDOM.append(" - ", showBtnDOM);
+  headerDOM.append(" - ", helpBtn);
   container.append(renderNonGPAEditor(), table.DOM());
   gridDom.prepend(container);
   container.style.maxHeight = container.scrollHeight + "px";
-};
+}

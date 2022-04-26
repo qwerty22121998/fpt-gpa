@@ -1,7 +1,7 @@
 {
   "name": "FU GPA",
   "version": "1.4.1",
-  "manifest_version": 2,
+  "manifest_version": 3,
   "description": "Calculate Total GPA and semester GPA",
   "homepage_url": "https://www.facebook.com/khanhvu2212",
   "icons": {
@@ -9,30 +9,30 @@
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
-  "page_action": {
+  "action": {
     "default_icon": "icons/icon19.png",
     "default_title": "FU GPA"
   },
-  "permissions": [
+  "permissions": ["storage"],
+  "host_permissions": [
     "http://fap.fpt.edu.vn/Grade/StudentTranscript.aspx",
-    "https://fap.fpt.edu.vn/Grade/StudentTranscript.aspx",
-    "storage"
+    "https://fap.fpt.edu.vn/Grade/StudentTranscript.aspx"
   ],
-  "content_scripts": [{
-    "matches": [
-      "https://fap.fpt.edu.vn/Grade/StudentTranscript.aspx",
-      "http://fap.fpt.edu.vn/Grade/StudentTranscript.aspx"
-    ],
-    "css": [
-      "css/gpa.css"
-    ],
-    "js": [
-      "js/define.js",
-      "js/util.js",
-      "js/const.js",
-      "js/nonGPA.js",
-      "js/logic.js"
-    ],
-    "run_at": "document_end"
-  }]
+  "content_scripts": [
+    {
+      "matches": [
+        "https://fap.fpt.edu.vn/Grade/StudentTranscript.aspx",
+        "http://fap.fpt.edu.vn/Grade/StudentTranscript.aspx"
+      ],
+      "css": ["css/gpa.css"],
+      "js": [
+        "js/define.js",
+        "js/util.js",
+        "js/const.js",
+        "js/nonGPA.js",
+        "js/logic.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
 }

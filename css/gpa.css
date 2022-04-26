@@ -8,6 +8,10 @@
   cursor: pointer;
 }
 
+#help-btn {
+  cursor: pointer;
+}
+
 .bl-btn {
   margin-left: 2pt;
   color: white;
