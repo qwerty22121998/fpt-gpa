@@ -20,9 +20,9 @@ const createElement = (root, ...elems) => {
 };
 
 const rankLabel = (grade) => {
-  if (grade >= 9) return "label-warning";
-  if (grade >= 8) return "label-primary";
-  if (grade >= 5) return "label-info";
+  if (grade >= 9) return "label-primary";
+  if (grade >= 8) return "label-info";
+  if (grade >= 5) return "label-warning";
   return "label-danger";
 };
 
@@ -37,7 +37,7 @@ const parseGrade = (doms) => {
 
 const showButtonDOM = () => {
   const dom = createHTML(
-    `<button class="label label-success" id="gpa-btn" type="button">Show GPA</button>`
+    `<button class="label label-success" style="border: none;" id="gpa-btn" type="button">Hide GPA</button>`
   );
 
   return dom;
@@ -117,11 +117,12 @@ const appendGPATable = (table) => {
 
   console.log(container.style.maxHeight);
   showBtnDOM.onclick = () => {
-    console.log(container.style.maxHeight);
     if (container.style.maxHeight != "0px") {
       container.style.maxHeight = "0px";
+      showBtnDOM.innerText = "Show GPA";
     } else {
       container.style.maxHeight = container.scrollHeight + 30 + "px";
+      showBtnDOM.innerText = "Hide GPA";
     }
   };
 
